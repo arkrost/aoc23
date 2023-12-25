@@ -24,16 +24,12 @@ fn process_line(line: &str) -> anyhow::Result<u32> {
         .split_whitespace()
         .filter(|n| n.parse::<u32>().map_or(false, |it| winning.contains(&it)))
         .count() as u32;
-    let res = if k > 0 {
-        1u32.shl(k - 1)
-    } else {
-        0
-    };
+    let res = if k > 0 { 1u32.shl(k - 1) } else { 0 };
     Ok(res)
 }
 
 fn part1(input: &str) -> u32 {
-    input.lines().flat_map(|l| process_line(l)).sum()
+    input.lines().flat_map(process_line).sum()
 }
 
 fn main() {
