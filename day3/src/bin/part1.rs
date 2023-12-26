@@ -17,11 +17,9 @@ fn collect_parts(input: &str) -> (Vec<Number>, Vec<Symbol>) {
     let mut symbols = Vec::<Symbol>::new();
 
     for (y, l) in input.lines().enumerate() {
-        let mut iter = l.chars().enumerate().into_iter();
-
         let mut acc: Option<Number> = None;
 
-        while let Some((x, c)) = iter.next() {
+        for (x, c) in l.chars().enumerate() {
             if let Some(d) = c.to_digit(10) {
                 acc = Some(match &acc {
                     None => Number {
@@ -64,7 +62,7 @@ fn part1(input: &str) -> u32 {
     let (numbers, symbols) = collect_parts(input);
     numbers
         .iter()
-        .filter(|n| symbols.iter().any(|s| neighbours(&n, &s)))
+        .filter(|n| symbols.iter().any(|s| neighbours(n, s)))
         .map(|n| n.value)
         .sum()
 }

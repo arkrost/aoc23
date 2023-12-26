@@ -14,7 +14,6 @@ fn parse_game_id(s: &str) -> Result<u32> {
 
     let invalid_rec: Option<&str> = records
         .split(';')
-        .into_iter()
         .find(|r| !r.parse::<Record>().is_ok_and(|rec| is_valid(&rec)));
 
     if let Some(rec_str) = invalid_rec {
@@ -45,7 +44,7 @@ impl FromStr for Record {
 
         for p in s.trim().split(", ") {
             let (count_str, color) = p
-                .split_once(" ")
+                .split_once(' ')
                 .context("Expected whitespace separated pair, got '{p}'")?;
 
             let count = count_str
@@ -65,7 +64,7 @@ impl FromStr for Record {
 }
 
 fn part1(input: &str) -> u32 {
-    input.lines().flat_map(|l| parse_game_id(l)).sum()
+    input.lines().flat_map(parse_game_id).sum()
 }
 
 fn main() {

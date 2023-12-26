@@ -37,7 +37,7 @@ impl FromStr for Record {
 
         for p in s.trim().split(", ") {
             let (count_str, color) = p
-                .split_once(" ")
+                .split_once(' ')
                 .context("Expected whitespace separated pair, got '{p}'")?;
 
             let count = count_str
@@ -57,7 +57,7 @@ impl FromStr for Record {
 }
 
 fn part2(input: &str) -> u32 {
-    input.lines().flat_map(|l| to_game_power(l)).sum()
+    input.lines().flat_map(to_game_power).sum()
 }
 
 fn main() {

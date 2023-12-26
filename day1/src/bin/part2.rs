@@ -29,7 +29,7 @@ fn to_value(line: &str) -> u32 {
 }
 
 fn part2(input: &str) -> u32 {
-    input.lines().map(|l| to_value(l)).sum()
+    input.lines().map(to_value).sum()
 }
 
 fn main() {
